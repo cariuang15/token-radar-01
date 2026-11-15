@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols, ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="dot" aria-hidden="true"></span>Token Radar</div>
+  <div class="meta" id="meta">Snapshot — · DefiLlama protocol index · radar-2 model</div>
+</header>
+
+<main>
+  <section class="lede">
+    <div>
+      <h1 id="headline">Pre-token protocols, ranked by implied value</h1>
+      <p class="intro" id="intro">Every protocol that records no token, ranked by what its TVL, growth, age and reach imply it could be worth at launch. Wrapped and staked products of tokens that already trade are off the board.</p>
+    </div>
+    <dl class="facts" id="facts"></dl>
+  </section>
+
+  <section class="panel" id="chart-panel" aria-label="Top ten by implied value">
+    <div class="panel-head"><h2>Top 10 by implied value</h2><span class="hint" id="chart-note"></span></div>
+    <div id="chart" class="chart"></div>
+  </section>
+
+  <section class="controls" aria-label="Filter and sort the board">
+    <label>Search <input id="q" type="search" placeholder="Search name, category or chain" autocomplete="off"></label>
+    <label>Category <select id="category"><option value="">All categories</option></select></label>
+    <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+    <label>Min TVL <select id="mintvl">
+      <option value="0">Any TVL</option><option value="50000000">$50M and up</option>
+      <option value="100000000">$100M and up</option><option value="500000000">$500M and up</option>
+      <option value="1000000000">$1B and up</option></select></label>
+    <label>Sort <select id="sort">
+      <option value="implied">Implied value</option><option value="tvl">TVL</option>
+      <option value="growth">7-day growth</option><option value="age">Age</option>
+      <option value="name">Name</option></select></label>
+    <label class="check"><input id="watchlist-only" type="checkbox"> Watchlist only</label>
+    <div class="tabs" role="tablist" aria-label="Token status">
+      <button id="tab-pre" role="tab" aria-selected="true">Pre-token</button>
+      <button id="tab-live" role="tab" aria-selected="false">Live token</button>
+    </div>
+    <span class="count" id="count"></span>
+  </section>
+
+  <section class="panel table-panel">
+    <p class="table-note" id="table-note">Pre-token protocols, strongest implied value first. Select a row for its model and farm plan.</p>
+    <table id="board">
+      <thead><tr>
+        <th data-sort="rank">Rank</th><th data-sort="name">Protocol</th><th data-sort="tvl">TVL</th>
+        <th data-sort="growth">7d</th><th data-sort="age">Age</th><th data-sort="implied">Implied value</th><th>Token</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="more"><button id="more" type="button">Show more</button></div>
+  </section>
+
+  <section class="panel method" aria-label="How the model works">
+    <h2>How the model works</h2>
+    <p>Implied value = <code>TVL × category multiple × growth × maturity × chains</code>. Growth is the 7-day TVL change, clamped to −60%…+120% and weighted 0.6. Maturity is 0.6 + up to 0.4 for up to three years listed with no token; a protocol with no listing date is scored as one year old. Chains adds 4% per chain past the first, up to 20%.</p>
+    <div class="method-grid">
+      <div>
+        <h3>Category multiples</h3>
+        <p class="small">Implied dollars per dollar of TVL. A derivatives venue keeps a share of the flow it routes; a bridge moves value it does not keep, so the market has paid less per dollar of TVL for one. A category not named here takes 0.25.</p>
+        <table class="mini" id="multiples"></table>
+      </div>
+      <div>
+        <h3>What the board is not</h3>
+        <ul>
+          <li><strong>Not a price.</strong> Implied value is a model of what a launch could be worth, built only from this snapshot. It is not a prediction.</li>
+          <li><strong>No token ≠ no token ever.</strong> The snapshot records no token for these protocols; it does not say one is coming, or when.</li>
+          <li><strong>Wrapped products are out.</strong> A staked, wrapped or bridged product of a token that already trades is not a token that does not exist yet, whatever its TVL.</li>
+          <li><strong>Farm at your own risk.</strong> Never pay to claim an airdrop. Claim only from the protocol's own published link, and only with funds you can lose.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<aside id="detail" class="detail" aria-label="Protocol detail" hidden>
+  <button id="close" type="button">Close</button>
+  <div id="detail-body"></div>
+</aside>
+
+<footer class="foot" id="foot"></footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
